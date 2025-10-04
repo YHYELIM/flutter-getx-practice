@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_todo_app/getx_blog/pages/user/login_page.dart';
+import 'package:validators/validators.dart';
 
 import '../../components/custom_text_form_field.dart';
 import '../../components/custon_elevated_button.dart';
@@ -9,6 +10,7 @@ import '../../components/custon_elevated_button.dart';
 class JoinPage extends StatelessWidget {
   // 폼의 상테를 관리하는 글로벌 키
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,21 +38,33 @@ class JoinPage extends StatelessWidget {
   // 메서드의 return 타입은 부모 타입 (Widget)으로 잡아주는게 좋다
   Widget _joinForm() {
     return Form(
-      // 외부에서도 이 Form을 컨트롤 할 수 있,
+      // 외부에서도 이 Form을 컨트롤 할 수 있음
       key: _formKey,
       // 백엔드에 데이터를 한꺼번에 보낼거면 Form위젯으로 감싸는것이 좋다
       child: Column(
         children: [
-          CustomTextFormField(hint: 'Username', funValidator: (value){
-            print(value);
-          },),
-          CustomTextFormField(hint: 'Password',funValidator: (value){}, ),
-          CustomTextFormField(hint: 'Email',funValidator: (value){},),
+          CustomTextFormField(
+            hint: 'Username',
+            funValidator: (String? value) {
+              if (value!.isEmpty) {
+                return "공백이 들어갈 수 없습니다.";
+              } else if(!isAlpha(value)){
+                return "유저네임에 한글이 들어갈 수 없습니다.";
+              } else if(value.length > 12){
+                return "유저네임의 길이를 초과하였습니다.";
+              } else {
+                return null;
+              }
+            },
+          ),
+          CustomTextFormField(hint: 'Password', funValidator: (value) {}),
+          CustomTextFormField(hint: 'Email', funValidator: (value) {}),
           CustomElevatedButton(
             text: '회원가입',
             funPageRoute: () {
-              _formKey.currentState!.validate();
-              Get.to(LoginPage());
+              if (_formKey.currentState!.validate()) {
+                Get.to(LoginPage());
+              }
             },
           ),
         ],
