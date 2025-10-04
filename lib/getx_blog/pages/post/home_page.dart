@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/pages/post/detail_page.dart';
 import 'package:getx_todo_app/getx_blog/size.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,7 +13,15 @@ class HomePage extends StatelessWidget {
       body: ListView.separated(
         itemCount: 3,
         itemBuilder: (context, index) {
-          return ListTile(title: Text('제목1'), leading: Text("1"));
+          return ListTile(
+            onTap: (){
+              Get.to(DetailPage(index));
+              // index가 돌면서 차례대로 값 넘김
+              //arguments: '안녕'
+
+            },
+              title: Text('제목1'),
+              leading: Text("1"));
         },
         separatorBuilder: (BuildContext context, int index) {
           return Divider();
@@ -48,7 +59,7 @@ class HomePage extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  '회원정보보기',
+                  '로그아웃',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black54,
