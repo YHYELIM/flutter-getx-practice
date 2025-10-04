@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_todo_app/getx_blog/pages/post/detail_page.dart';
+import 'package:getx_todo_app/getx_blog/pages/post/write_page.dart';
+import 'package:getx_todo_app/getx_blog/pages/user/user_info_page.dart';
 import 'package:getx_todo_app/getx_blog/size.dart';
 
 class HomePage extends StatelessWidget {
@@ -45,7 +47,23 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(WritePage());
+                },
+                child: Text(
+                  '글쓰기',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Divider(),
+              TextButton(
+                onPressed: () {
+                  Get.to(UserInfoPage());
+                },
                 child: Text(
                   '회원정보보기',
                   style: TextStyle(
