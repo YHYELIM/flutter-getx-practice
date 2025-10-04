@@ -48,8 +48,11 @@ class JoinPage extends StatelessWidget {
             hint: 'Username',
             funValidator: validateUsername(),
           ),
-          CustomTextFormField(hint: 'Password', funValidator: validatePassword()),
-          CustomTextFormField(hint: 'Email',funValidator: validateEmail()),
+          CustomTextFormField(
+            hint: 'Password',
+            funValidator: validatePassword(),
+          ),
+          CustomTextFormField(hint: 'Email', funValidator: validateEmail()),
           CustomElevatedButton(
             text: '회원가입',
             funPageRoute: () {
@@ -57,6 +60,12 @@ class JoinPage extends StatelessWidget {
                 Get.to(LoginPage());
               }
             },
+          ),
+          TextButton(
+            onPressed: () {
+              Get.to(LoginPage());
+            },
+            child: Text("이미 회원가입이 되어 있나요?"),
           ),
         ],
       ),

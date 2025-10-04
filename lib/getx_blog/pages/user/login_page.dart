@@ -10,6 +10,7 @@ import '../../components/custon_elevated_button.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +38,14 @@ class LoginPage extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(hint: 'Username', funValidator: validateUsername(),),
-          CustomTextFormField(hint: 'Password',funValidator: validatePassword(),),
+          CustomTextFormField(
+            hint: 'Username',
+            funValidator: validateUsername(),
+          ),
+          CustomTextFormField(
+            hint: 'Password',
+            funValidator: validatePassword(),
+          ),
           CustomElevatedButton(
             text: '로그인',
             funPageRoute: () {
@@ -46,6 +53,12 @@ class LoginPage extends StatelessWidget {
                 Get.to(LoginPage());
               }
             },
+          ),
+          TextButton(
+            onPressed: () {
+              Get.to(JoinPage());
+            },
+            child: Text("아직 회원가입이 안되어 있나요?"),
           ),
         ],
       ),
