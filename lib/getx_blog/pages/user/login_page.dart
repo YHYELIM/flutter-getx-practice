@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_todo_app/getx_blog/pages/post/home_page.dart';
 import 'package:getx_todo_app/getx_blog/pages/user/join_page.dart';
+import 'package:getx_todo_app/getx_blog/util/validator_util.dart';
 
 import '../../components/custom_text_form_field.dart';
 import '../../components/custon_elevated_button.dart';
@@ -36,11 +37,15 @@ class LoginPage extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(hint: 'Username', funValidator: (value){},),
-          CustomTextFormField(hint: 'Password',funValidator: (value){},),
+          CustomTextFormField(hint: 'Username', funValidator: validateUsername(),),
+          CustomTextFormField(hint: 'Password',funValidator: validatePassword(),),
           CustomElevatedButton(
             text: '로그인',
-            funPageRoute: () => Get.to(HomePage()),
+            funPageRoute: () {
+              if (_formKey.currentState!.validate()) {
+                Get.to(LoginPage());
+              }
+            },
           ),
         ],
       ),
