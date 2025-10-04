@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/pages/user/login_page.dart';
 
 import '../../components/custom_text_form_field.dart';
 import '../../components/custon_elevated_button.dart';
@@ -16,10 +19,10 @@ class JoinPage extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               height: 200,
-              child: Text('회원가입 페이지', style:TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              ),),
+              child: Text(
+                '회원가입 페이지',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
             ),
             _joinForm(),
           ],
@@ -31,15 +34,18 @@ class JoinPage extends StatelessWidget {
   // 메서드의 return 타입은 부모 타입 (Widget)으로 잡아주는게 좋다
   Widget _joinForm() {
     return Form(
-            // 백엔드에 데이터를 한꺼번에 보낼거면 Form위젯으로 감싸는것이 좋다
-            child: Column(
-              children: [
-                CustomTextFormField(hint: 'Username'),
-                CustomTextFormField(hint: 'Password'),
-                CustomTextFormField(hint: 'Email'),
-                CustomElevatedButton(text: '회원가입'),
-              ],
-            ),
-          );
+      // 백엔드에 데이터를 한꺼번에 보낼거면 Form위젯으로 감싸는것이 좋다
+      child: Column(
+        children: [
+          CustomTextFormField(hint: 'Username'),
+          CustomTextFormField(hint: 'Password'),
+          CustomTextFormField(hint: 'Email'),
+          CustomElevatedButton(
+            text: '회원가입',
+            pageRoute: () => Get.to(LoginPage()),
+          ),
+        ],
+      ),
+    );
   }
 }

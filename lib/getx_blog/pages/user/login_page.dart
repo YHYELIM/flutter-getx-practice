@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/pages/post/home_page.dart';
+import 'package:getx_todo_app/getx_blog/pages/user/join_page.dart';
 
 import '../../components/custom_text_form_field.dart';
 import '../../components/custon_elevated_button.dart';
@@ -14,10 +18,10 @@ class LoginPage extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               height: 200,
-              child: Text('로그인 페이지', style:TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold
-              ),),
+              child: Text(
+                '로그인 페이지',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
             ),
             _loginForm(),
           ],
@@ -32,7 +36,10 @@ class LoginPage extends StatelessWidget {
         children: [
           CustomTextFormField(hint: 'Username'),
           CustomTextFormField(hint: 'Password'),
-          CustomElevatedButton(text: '로그인'),
+          CustomElevatedButton(
+            text: '로그인',
+            pageRoute: () => Get.to(HomePage()),
+          ),
         ],
       ),
     );
