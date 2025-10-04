@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/domain/user/user_repository.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/post/home_page.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/user/join_page.dart';
 import 'package:getx_todo_app/getx_blog/util/validator_util.dart';
@@ -50,7 +51,9 @@ class LoginPage extends StatelessWidget {
             text: '로그인',
             funPageRoute: () {
               if (_formKey.currentState!.validate()) {
-                Get.to(LoginPage());
+                // Get.to(LoginPage());
+                UserRepository u = UserRepository();
+                u.login("ssar", "1234");
               }
             },
           ),
