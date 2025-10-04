@@ -8,6 +8,7 @@ import '../../components/custom_text_form_field.dart';
 import '../../components/custon_elevated_button.dart';
 
 class LoginPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +33,14 @@ class LoginPage extends StatelessWidget {
 
   Widget _loginForm() {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(hint: 'Username'),
-          CustomTextFormField(hint: 'Password'),
+          CustomTextFormField(hint: 'Username', funValidator: (value){},),
+          CustomTextFormField(hint: 'Password',funValidator: (value){},),
           CustomElevatedButton(
             text: '로그인',
-            pageRoute: () => Get.to(HomePage()),
+            funPageRoute: () => Get.to(HomePage()),
           ),
         ],
       ),

@@ -5,9 +5,10 @@ import 'package:getx_todo_app/getx_blog/pages/user/login_page.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String text;
-  final pageRoute; // 익명 함수 받기
+  final funPageRoute; // 익명 함수 받기
 
-  const CustomElevatedButton({required this.text, required this.pageRoute});
+
+  const CustomElevatedButton({required this.text, required this.funPageRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CustomElevatedButton extends StatelessWidget {
         minimumSize: Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      onPressed: pageRoute,
+      onPressed: funPageRoute,
       child: Text('${text}'),
     );
   }

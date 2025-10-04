@@ -14,6 +14,8 @@ dependencies:
 
   # GetX 상태관리
   get: ^4.6.6
+  validators: ^3.0.0
+
 
   # iOS 스타일 아이콘
   cupertino_icons: ^1.0.8
