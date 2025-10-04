@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/controller/user_controller.dart';
 import 'package:getx_todo_app/getx_blog/domain/user/user_repository.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/post/home_page.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/user/join_page.dart';
@@ -11,7 +12,7 @@ import '../../components/custon_elevated_button.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-
+  UserController u = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +53,6 @@ class LoginPage extends StatelessWidget {
             funPageRoute: () {
               if (_formKey.currentState!.validate()) {
                 // Get.to(LoginPage());
-                UserRepository u = UserRepository();
                 u.login("ssar", "1234");
               }
             },

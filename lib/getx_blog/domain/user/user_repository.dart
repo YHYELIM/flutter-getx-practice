@@ -6,17 +6,16 @@ import 'package:getx_todo_app/getx_blog/domain/user/user_provider.dart';
 class UserRepository {
   final UserProivder _userProivder = UserProivder();
 
-  Future<void> login(String username, String password) async {
+  Future<String> login(String username, String password) async {
     // username, password를 받아서 Map타입으로 만들어서 넣어야함
     LoginReqDto loginReqDto = LoginReqDto(username, password); // Dart 클래스 오브젝트
 
-    print("=======");
-    print(loginReqDto.toJson());
     Response response = await _userProivder.login(loginReqDto.toJson());
-    print("=======");
-    print(response.body);
-    print("=======");
-    print(response.headers);
+
+    dynamic headers = response.headers;
+    String token = headers["authorization"];
+    return token;
+
   }
 }
 
