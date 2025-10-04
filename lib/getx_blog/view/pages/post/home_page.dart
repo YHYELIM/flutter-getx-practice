@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:getx_todo_app/getx_blog/pages/post/detail_page.dart';
-import 'package:getx_todo_app/getx_blog/pages/post/write_page.dart';
-import 'package:getx_todo_app/getx_blog/pages/user/user_info_page.dart';
+import 'package:getx_todo_app/getx_blog/view/pages/post/write_page.dart';
+import 'package:getx_todo_app/getx_blog/view/pages/user/user_info_page.dart';
 import 'package:getx_todo_app/getx_blog/size.dart';
+
+import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
   @override

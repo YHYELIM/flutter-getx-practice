@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:getx_todo_app/getx_blog/pages/post/home_page.dart';
-import 'package:getx_todo_app/getx_blog/pages/post/update_page.dart';
+import 'package:getx_todo_app/getx_blog/view/pages/post/update_page.dart';
+
+import '../../../../day1_getx/routing/pages/main.dart';
 
 class DetailPage extends StatelessWidget {
   final int id;
