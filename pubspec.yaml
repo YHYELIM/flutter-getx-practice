@@ -15,6 +15,7 @@ dependencies:
   # GetX 상태관리
   get: ^4.6.6
   validators: ^3.0.0
+  intl: ^0.20.2
 
 
   # iOS 스타일 아이콘
