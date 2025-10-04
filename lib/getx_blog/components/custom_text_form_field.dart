@@ -10,8 +10,9 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        obscureText: hint=='Password'?true:false,
         decoration: InputDecoration(
-          hintText: "${hint}", // 변수 넣을때 문자열 안에 넣는게 좋다 -> null 안정성
+          hintText: "Enter ${hint}", // 변수 넣을때 문자열 안에 넣는게 좋다 -> null 안정성
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),

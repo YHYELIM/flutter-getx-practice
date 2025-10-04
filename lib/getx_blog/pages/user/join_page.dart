@@ -34,9 +34,9 @@ class JoinPage extends StatelessWidget {
             // 백엔드에 데이터를 한꺼번에 보낼거면 Form위젯으로 감싸는것이 좋다
             child: Column(
               children: [
-                CustomTextFormField(hint: 'Enter Username'),
-                CustomTextFormField(hint: 'Enter Password'),
-                CustomTextFormField(hint: 'Enter Email'),
+                CustomTextFormField(hint: 'Username'),
+                CustomTextFormField(hint: 'Password'),
+                CustomTextFormField(hint: 'Email'),
                 CustomElevatedButton(text: '회원가입'),
               ],
             ),
