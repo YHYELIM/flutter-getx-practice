@@ -28,12 +28,12 @@ class DetailPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Obx(() => Column(
           children: [
-
             Text(
               "${p.post.value.title}",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
             ),
-            Row(
+            Divider(),
+            u.principal.value.id == p.post.value.user!.id ?Row(
               children: [
                 ElevatedButton(onPressed: () {
                   Get.off(HomePage());
@@ -44,7 +44,7 @@ class DetailPage extends StatelessWidget {
                   Get.to(UpdatePage());
                 }, child: Text('수정')),
               ],
-            ),
+            ) : SizedBox(),
             Expanded(
               // SingleChildScrollView: 글 하나가 들어옴으로  사용
               // SingleChildScrollView는 높이를 지정해줘야함  -> Expanded 사용
