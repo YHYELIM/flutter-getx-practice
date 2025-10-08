@@ -11,11 +11,13 @@ import '../user/login_page.dart';
 import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   // put : 없으면 만들고, 있으면 찾기!!
   // 앞에 UserController 만들어놨으니까 find만 함
   // UserController u = Get.put(UserController());
   // find할때는 타입만 적어주면 알아서 찾아줌
   UserController u = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +30,32 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('${u.isLogin}'),
       ),
-      body: Obx(()=> ListView.separated(
-        itemCount: p.posts.length, // post 갯수만큼
-        itemBuilder: (context, index) {
-          return ListTile(
-              onTap: ()async{
-                // 클릭할때 findById 만들어진 상태에서 DetailPage 이동
-                // DetailPage에서 obx로 접근하면 끝
-                // 얘도 기다려줘야함
-                await p.findById(p.posts[index].id!);
-                Get.to(()=> DetailPage(p.posts[index].id));
-                // index가 돌면서 차례대로 값 넘김
-                //arguments: '안녕'
+      body: Obx(()=> RefreshIndicator(
+        key: refreshKey,
+        onRefresh: () async{
+           p.findAll();
+        },
+        child: ListView.separated(
+          itemCount: p.posts.length, // post 갯수만큼
+          itemBuilder: (context, index) {
+            return ListTile(
+                onTap: ()async{
+                  // 클릭할때 findById 만들어진 상태에서 DetailPage 이동
+                  // DetailPage에서 obx로 접근하면 끝
+                  // 얘도 기다려줘야함
+                  await p.findById(p.posts[index].id!);
+                  Get.to(()=> DetailPage(p.posts[index].id));
+                  // index가 돌면서 차례대로 값 넘김
+                  //arguments: '안녕'
 
-              },
-              title: Text('${p.posts[index].title}'),
-              leading: Text('${p.posts[index].id}'));
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
+                },
+                title: Text('${p.posts[index].title}'),
+                leading: Text('${p.posts[index].id}'));
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider();
+          },
+        ),
       ),),
     );
   }
