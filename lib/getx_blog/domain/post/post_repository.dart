@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:getx_todo_app/getx_blog/controller/dto/CMRespDto.dart';
 import 'package:getx_todo_app/getx_blog/controller/dto/LoginReqDto.dart';
@@ -9,6 +11,15 @@ import 'package:getx_todo_app/getx_blog/util/convert_utf8.dart';
 // 통신을 호출해서 응답되는 데이터를 예쁘게 가공!! => json => Dart 오브젝트
 class PostRepository {
   final PostProvider _postProvider = PostProvider();
+
+  Future<int> deleteById (int id)async{
+    Response response = await _postProvider.deleteById(id);
+    dynamic body = response.body;
+    Cmrespdto cmrespdto = Cmrespdto.fromJson(body);
+
+    return cmrespdto.code!;
+
+  }
 
   Future <Post> findById(int id)async{
     Response response = await _postProvider.findById(id);

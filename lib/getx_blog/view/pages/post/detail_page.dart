@@ -4,8 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:getx_todo_app/getx_blog/controller/post_controller.dart';
 import 'package:getx_todo_app/getx_blog/controller/user_controller.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/post/update_page.dart';
-
-import '../../../../day1_getx/routing/pages/main.dart';
+import 'package:getx_todo_app/getx_blog/view/pages/post/home_page.dart';
 
 class DetailPage extends StatelessWidget {
   final int? id;
@@ -35,7 +34,8 @@ class DetailPage extends StatelessWidget {
             Divider(),
             u.principal.value.id == p.post.value.user!.id ?Row(
               children: [
-                ElevatedButton(onPressed: () {
+                ElevatedButton(onPressed: () async{
+                  await p.deleteById(p.post.value.id!);
                   Get.off(HomePage());
                   // 상태관리로 갱신 시킬 수 있음
                 }, child: Text('삭제')),
