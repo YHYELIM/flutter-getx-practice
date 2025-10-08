@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final String hint;
   final funValidator;
-  final String? value;
   final controller;
 
   const CustomTextFormField({
     required this.hint,
     required this.funValidator,
-    this.value,
     this.controller,
   });
 
@@ -19,7 +17,6 @@ class CustomTextFormField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
         controller: controller,
-        initialValue: value,
         // 함수를 외부에서 받아야함 -> validation 체크해야할 값들이 다르기때문
         validator: funValidator,
         obscureText: hint == 'Password' ? true : false,

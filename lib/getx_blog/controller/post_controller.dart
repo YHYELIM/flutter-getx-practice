@@ -16,6 +16,16 @@ class PostController extends GetxController {
     findAll(); // 초기에 findAll() 호출
   }
 
+  Future<void> updateById(int id, String title, String content) async{
+    Post post = await _postRepository.updateById(id, title, content);
+    if(post.id != null){
+      this.post.value = post;
+      // posts를 순회하면서 post의 id와 id가 같으면
+      // ...e의 값을 ...post로 변경하고 아니면 ...e 반환
+     this.posts.value = this.posts.map((e) => e.id == id ? post : e).toList();
+    }
+  }
+
   Future<void> deleteById(int id) async{
     int result = await _postRepository.deleteById(id);
     if (result == 1){
@@ -24,6 +34,7 @@ class PostController extends GetxController {
       // print(result.length);
       // deleteById에서 받은 id와 post id가 같지 않은 것만 result에 담음
       posts.value = result;
+
     }
     // posts 데이터를 갱신해줘야함
 }
