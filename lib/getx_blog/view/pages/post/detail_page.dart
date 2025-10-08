@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/controller/post_controller.dart';
+import 'package:getx_todo_app/getx_blog/controller/user_controller.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/post/update_page.dart';
 
 import '../../../../day1_getx/routing/pages/main.dart';
 
 class DetailPage extends StatelessWidget {
-  final int id;
+  final int? id;
 
   const DetailPage(this.id);
 
@@ -14,14 +16,20 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // arguments: dynamic 타입이라 뭘로 받을지 정해주면 됨
     // String data = Get.arguments;
+    UserController u = Get.find();
+    PostController p = Get.find();
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("게시글 아이디 : $id, 로그인 상태 : ${u.isLogin}"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: Obx(() => Column(
           children: [
+
             Text(
-              '글 제목 !!',
+              "${p.post.value.title}",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
             ),
             Row(
@@ -39,10 +47,10 @@ class DetailPage extends StatelessWidget {
             Expanded(
               // SingleChildScrollView: 글 하나가 들어옴으로  사용
               // SingleChildScrollView는 높이를 지정해줘야함  -> Expanded 사용
-              child: SingleChildScrollView(child: Text('글 내용 !!' * 500)),
+              child: SingleChildScrollView(child: Text("${p.post.value.content}")),
             ),
           ],
-        ),
+        ),),
       ),
     );
   }

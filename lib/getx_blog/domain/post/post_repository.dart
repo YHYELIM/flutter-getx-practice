@@ -10,6 +10,23 @@ import 'package:getx_todo_app/getx_blog/util/convert_utf8.dart';
 class PostRepository {
   final PostProvider _postProvider = PostProvider();
 
+  Future <Post> findById(int id)async{
+    print("Repository - findById 호출, id: $id");
+    Response response = await _postProvider.findById(id);
+    dynamic body = response.body;
+    print("Response 상태 코드: ${response.statusCode}");
+    Cmrespdto cmrespdto = Cmrespdto.fromJson(body);
+    print("Response body: ${response.body}");
+
+    if(cmrespdto.code == 1){
+      Post post = Post.fromJson(cmrespdto.data); // 한건이니까 List로 바꿀 필요 없음
+      print("변환된 Post: title=${post.title}, content=${post.content}");
+      return post;
+    } else{
+      return Post();
+    }
+  }
+
   Future<List<Post>> findAll() async {
     Response response = await _postProvider.findAll();
     dynamic body = response.body;

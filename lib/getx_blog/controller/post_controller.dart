@@ -7,6 +7,7 @@ class PostController extends GetxController {
 
   final PostRepository _postRepository = PostRepository();
   final posts = <Post>[].obs;
+  final post = Post().obs;
 
 
   @override
@@ -15,9 +16,15 @@ class PostController extends GetxController {
     findAll(); // 초기에 findAll() 호출
   }
 
-  void findAll()async {
+  void findAll() async {
     List<Post> posts = await _postRepository.findAll();
     // 통신 끝나면 여기에 담김
     this.posts.value = posts;
+  }
+
+  Future <void> findById(int id) async{
+    Post post = await _postRepository.findById(id);
+    print("받아온 post 데이터: title=${post.title}, content=${post.content}");
+    this.post.value = post;
   }
 }
