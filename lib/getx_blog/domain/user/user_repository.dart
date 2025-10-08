@@ -12,10 +12,16 @@ class UserRepository {
 
     Response response = await _userProivder.login(loginReqDto.toJson());
 
-    dynamic headers = response.headers;
-    String token = headers["authorization"];
-    return token;
+    print("Response status: ${response.statusCode}");
+    print("Response headers: ${response.headers}");
 
+    dynamic headers = response.headers;
+    if (headers["authorization"] == null || headers["authorization"].toString().contains("null")) {
+      return "-1";
+    } else {
+      String token = headers["authorization"];
+      return token;
+    }
   }
 }
 

@@ -12,7 +12,10 @@ import '../../components/custon_elevated_button.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  UserController u = Get.put(UserController());
+  final UserController u = Get.put(UserController());
+
+  final  _username = TextEditingController();
+  final  _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,19 +44,25 @@ class LoginPage extends StatelessWidget {
       child: Column(
         children: [
           CustomTextFormField(
+            controller: _username,
             hint: 'Username',
             funValidator: validateUsername(),
           ),
           CustomTextFormField(
+            controller: _password,
             hint: 'Password',
             funValidator: validatePassword(),
           ),
           CustomElevatedButton(
             text: '로그인',
-            funPageRoute: () {
+            funPageRoute: () async {
               if (_formKey.currentState!.validate()) {
-                // Get.to(LoginPage());
-                u.login("ssar", "1234");
+                String token = await u.login(_username.text.trim(), _password.text.trim());
+                if (token != "-1"){
+                  Get.to(()=>HomePage()); // 화면 이동과 동시에 연결된 controller 꺼짐
+                } else {
+                  Get.snackbar("로그인 시도", "로그인 실패");
+                }
               }
             },
           ),

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-const host = "http://172.30.1.63:8080";
+const host = "http://172.30.1.68:8080";
 // 통신
 class UserProivder extends GetConnect{
   // Map 타입으로 데이터 날림

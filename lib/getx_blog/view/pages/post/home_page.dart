@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/controller/user_controller.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/post/write_page.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/user/user_info_page.dart';
 import 'package:getx_todo_app/getx_blog/size.dart';
 
+import '../user/login_page.dart';
 import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
+  // put : 없으면 만들고, 있으면 찾기!!
+  // 앞에 UserController 만들어놨으니까 find만 함
+  // UserController u = Get.put(UserController());
+  // find할때는 타입만 적어주면 알아서 찾아줌
+  UserController u = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _navigation(context),
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('${u.isLogin}'),
+      ),
       body: ListView.separated(
         itemCount: 3,
         itemBuilder: (context, index) {
@@ -37,6 +47,8 @@ class HomePage extends StatelessWidget {
   // 다른 페이지에서도 사용함 -> widget
 
   Widget _navigation(BuildContext context) {
+
+    UserController u = Get.find();
     return Container(
       width: getDrawerWidth(context), // 현재 화면의 context를 넘김
       height: double.infinity,
@@ -77,7 +89,8 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  Get.to(UserInfoPage());
+                  u.logout();
+                  Get.to(LoginPage());
                 },
                 child: Text(
                   '로그아웃',
