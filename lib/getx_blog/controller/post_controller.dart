@@ -24,7 +24,6 @@ class PostController extends GetxController {
 
   Future <void> findById(int id) async{
     Post post = await _postRepository.findById(id);
-    print("받아온 post 데이터: title=${post.title}, content=${post.content}");
     this.post.value = post;
   }
 }

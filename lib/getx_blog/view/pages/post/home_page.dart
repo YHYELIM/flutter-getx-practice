@@ -32,11 +32,12 @@ class HomePage extends StatelessWidget {
         itemCount: p.posts.length, // post 갯수만큼
         itemBuilder: (context, index) {
           return ListTile(
-              onTap: (){
+              onTap: ()async{
                 // 클릭할때 findById 만들어진 상태에서 DetailPage 이동
                 // DetailPage에서 obx로 접근하면 끝
-                p.findById(p.posts[index].id!);
-                Get.to(DetailPage(p.posts[index].id));
+                // 얘도 기다려줘야함
+                await p.findById(p.posts[index].id!);
+                Get.to(()=> DetailPage(p.posts[index].id));
                 // index가 돌면서 차례대로 값 넘김
                 //arguments: '안녕'
 

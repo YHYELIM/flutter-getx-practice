@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -57,8 +59,8 @@ class LoginPage extends StatelessWidget {
             text: '로그인',
             funPageRoute: () async {
               if (_formKey.currentState!.validate()) {
-                String token = await u.login(_username.text.trim(), _password.text.trim());
-                if (token != "-1"){
+                int result = await u.login(_username.text.trim(), _password.text.trim());
+                if (result == 1){
                   Get.to(()=>HomePage()); // 화면 이동과 동시에 연결된 controller 꺼짐
                 } else {
                   Get.snackbar("로그인 시도", "로그인 실패");
