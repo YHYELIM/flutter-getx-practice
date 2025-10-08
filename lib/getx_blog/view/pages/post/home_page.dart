@@ -12,6 +12,7 @@ import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   // put : 없으면 만들고, 있으면 찾기!!
   // 앞에 UserController 만들어놨으니까 find만 함
   // UserController u = Get.put(UserController());
@@ -26,6 +27,15 @@ class HomePage extends StatelessWidget {
     // p.findAll(); 여기서 응답을 받으면 안됨 ->받으려면 async,await 사용해야하는데 그렇게 되면 응답 다운이 될때까지 화면이 멈춰버려서 ux가 안좋아짐
 
     return Scaffold(
+      key: scaffoldKey,
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        if(scaffoldKey.currentState!.isDrawerOpen){
+          // drawer가 open 상태이면,
+          scaffoldKey.currentState!.openEndDrawer();
+        }else{
+          scaffoldKey.currentState!.openDrawer();
+        }
+      }, child: Icon(Icons.code),),
       drawer: _navigation(context),
       appBar: AppBar(
         title: Text('${u.isLogin}'),
@@ -92,7 +102,9 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  Get.to(UserInfoPage());
+                  // Navigator.pop(context);
+                  scaffoldKey.currentState!.openEndDrawer();
+                  Get.to(()=>UserInfoPage());
                 },
                 child: Text(
                   '회원정보보기',
