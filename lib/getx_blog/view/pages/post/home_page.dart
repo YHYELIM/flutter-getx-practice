@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:getx_todo_app/getx_blog/controller/post_controller.dart';
 import 'package:getx_todo_app/getx_blog/controller/user_controller.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/post/write_page.dart';
 import 'package:getx_todo_app/getx_blog/view/pages/user/user_info_page.dart';
@@ -18,28 +19,32 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // put : 객체 생성 (create),onInit 함수 실행 (initialize)
+    PostController p = Get.put(PostController());
+    // p.findAll(); 여기서 응답을 받으면 안됨 ->받으려면 async,await 사용해야하는데 그렇게 되면 응답 다운이 될때까지 화면이 멈춰버려서 ux가 안좋아짐
+
     return Scaffold(
       drawer: _navigation(context),
       appBar: AppBar(
         title: Text('${u.isLogin}'),
       ),
-      body: ListView.separated(
-        itemCount: 3,
+      body: Obx(()=> ListView.separated(
+        itemCount: p.posts.length, // post 갯수만큼
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: (){
-              Get.to(DetailPage(index));
-              // index가 돌면서 차례대로 값 넘김
-              //arguments: '안녕'
+              onTap: (){
+                Get.to(DetailPage(index));
+                // index가 돌면서 차례대로 값 넘김
+                //arguments: '안녕'
 
-            },
-              title: Text('제목1'),
-              leading: Text("1"));
+              },
+              title: Text('${p.posts[index].title}'),
+              leading: Text('${p.posts[index].id}'));
         },
         separatorBuilder: (BuildContext context, int index) {
           return Divider();
         },
-      ),
+      ),),
     );
   }
 
